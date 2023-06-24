@@ -1,0 +1,49 @@
+version: "3"
+services:
+  db:
+    container_name: chimera-db
+    image: mysql:8
+    platform: linux/arm64
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/my.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: chimera_development
+  api:
+    container_name: chimera-api
+    build:
+      context: ./api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/app/api
+      # - ./api/vendor/bundle:/app/api/vendor/bundle:delegated
+    depends_on:
+      - db
+      # - frontend
+    environment:
+      RAILS_ENV: "development"
+    # command: >
+    #   bash -c "
+    #     bundle config set path vendor/bundle
+    #     bundle install
+    #     bundle exec puma -C config/puma.rb"
+    env_file: .env
+    # stdin_open: true
+    tty: true
+  web:
+    container_name: chimera-web
+    build:
+      context: ./web
+    ports:
+      - 80:80
+    depends_on:
+      - api
+    # tty: true
+volumes:
+  mysql_data:

@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :api, format: 'json' do
+    namespace :v1 do
+      # task
+      resources :tasks do
+        member do
+          get :move_higher, to: 'task_position#higher'
+          get :move_lower, to: 'task_position#lower'
+        end
+      end
+    end
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  scope module: :gui do
+    get '(/*path)', to: 'home#show'
+  end
 end

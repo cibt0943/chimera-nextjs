@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title Kobushi
+    = csrf_meta_tags
+    = csp_meta_tag
+    / = stylesheet_pack_tag 'vendor'
+    / = stylesheet_pack_tag 'common'
+    / = javascript_pack_tag 'vendor', defer: true
+    / = javascript_pack_tag 'common', defer: true
+    / = javascript_pack_tag 'main', defer: true
+  body
+    = yield

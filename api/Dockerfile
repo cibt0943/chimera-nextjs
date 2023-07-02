@@ -23,5 +23,11 @@ RUN \
 
 WORKDIR $APP_ROOT
 
+# COPY Gemfile Gemfile.lock ./
+# COPY . .
+
+# Bundlerを使用してGemをインストールしてpumaを起動
 # RUN bundle install
-#     bundle exec puma -C config/puma.rb
+
+# puma起動
+# CMD bundle exec puma -C config/puma.rb

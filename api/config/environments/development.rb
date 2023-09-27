@@ -78,4 +78,7 @@ Rails.application.configure do
   config.logger = logger
   # 標準出力のみ
   # config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+
+  # アクセス可能なホストの指定
+  config.hosts.clear
 end

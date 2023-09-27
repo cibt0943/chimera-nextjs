@@ -9,7 +9,7 @@ module Secured
   }.freeze
 
   included do
-    before_action :authenticate_request!
+    # before_action :authenticate_request!
   end
 
   def current_user

@@ -4,8 +4,18 @@ module Api
     class TasksController < PrivateController
       def index
         # p @auth_payload
-        tasks = Task.where(user_id: current_user, status: params[:statuses]).order(:position)
+        # tasks = Task.where(user_id: current_user, status: params[:statuses]).order(:position)
+        tasks = Task.where(user_id: current_user, status: params[:statuses])
         render json: tasks, status: :ok, each_serializer: TaskSerializer
+      end
+
+      def show
+        task = find_task(params[:id])
+        if task
+          render json: task, status: :ok
+        else
+          render json: { errors: task.errors.as_json(full_messages: true) }, status: :bad_request
+        end
       end
 
       def create
@@ -20,7 +30,7 @@ module Api
       def update
         task = find_task(params[:id])
         if task.update(task_params)
-          render json: task, status: :ok
+          render json: task, status: :created
         else
           render json: { errors: task.errors.as_json(full_messages: true) }, status: :bad_request
         end

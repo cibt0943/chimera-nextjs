@@ -1,19 +1,8 @@
-# Ignore package files
-frontend/node_modules
-
-# Ignore yarn files
-frontend/yarn-error.log
-
-frontend/assets
-
 
 # Ignore env setting
 .env
 .env.*
 
-
-# Ignore storybook output directory
-storybook-static
 
 # VSCode
 *.code-workspace

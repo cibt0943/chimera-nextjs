@@ -6,8 +6,10 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint",
-    "format": "prettier --write ."
+    "lint": "next lint --fix",
+    "type": "tsc --noemit",
+    "format": "prettier --write .",
+    "style": "stylelint --fix '**/*.{css,scss,sass}'"
   },
   "dependencies": {
     "next": "13.5.4",

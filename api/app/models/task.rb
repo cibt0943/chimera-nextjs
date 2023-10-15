@@ -21,7 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  acts_as_list scope: [:user_id]
+  # acts_as_list scope: [:user_id]
   enum status: { new: 0, done: 1, doing: 2, canceled: 3, pending: 4 }, _prefix: true
 
   validates :status, inclusion: { in: %w[new done doing canceled pending], message: I18n.t('errors.messages.invalid') }

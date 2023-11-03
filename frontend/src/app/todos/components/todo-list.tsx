@@ -1,5 +1,5 @@
 import { Tasks } from '@/types/tasks'
-import Todo from './Todo'
+import Todo from './todo'
 
 interface TodoListProps {
   tasks: Tasks

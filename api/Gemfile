@@ -80,6 +80,8 @@ group :development do
 
   ## Add Gem ##
 
+  gem "pry-byebug"
+
   # エラー画面の高機能化
   gem "better_errors"
   gem "binding_of_caller"

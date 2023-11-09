@@ -4,8 +4,6 @@ type TaskProps = {
   task: Task
 }
 
-const Todo = ({ task }: TaskProps) => {
+export default function Todo({ task }: TaskProps) {
   return <div key={task.id}>{task.title}</div>
 }
-
-export default Todo

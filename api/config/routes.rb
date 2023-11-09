@@ -10,8 +10,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  scope module: :gui do
-    get '(/*path)', to: 'home#show'
-  end
 end

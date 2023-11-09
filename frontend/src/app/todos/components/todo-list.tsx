@@ -5,7 +5,7 @@ interface TodoListProps {
   tasks: Tasks
 }
 
-const TodoList = ({ tasks }: TodoListProps) => {
+export default function TodoList({ tasks }: TodoListProps) {
   return (
     <div>
       {tasks.map((task) => (
@@ -14,5 +14,3 @@ const TodoList = ({ tasks }: TodoListProps) => {
     </div>
   )
 }
-
-export default TodoList

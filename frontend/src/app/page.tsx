@@ -1,11 +1,12 @@
-import styles from './page.module.scss'
-import { ModeToggle } from '@/components/ui/mode-toggle'
+import ModeToggle from '@/components/mode-toggle'
+import Profile from '@/components/profile'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <h1>トップページです。</h1>
       <ModeToggle />
+      <Profile />
     </main>
   )
 }

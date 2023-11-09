@@ -3,45 +3,58 @@
 module Secured
   extend ActiveSupport::Concern
 
-  SCOPES = {
-    # '/api/v1/private'    => nil,
-    # '/api/v1/private-scoped' => ['read:messages']
+  REQUIRES_AUTHENTICATION = { message: 'Requires authentication' }.freeze
+  BAD_CREDENTIALS = {
+    message: 'Bad credentials'
+  }.freeze
+  MALFORMED_AUTHORIZATION_HEADER = {
+    error: 'invalid_request',
+    error_description: 'Authorization header value must follow this format: Bearer access-token',
+    message: 'Bad credentials'
+  }.freeze
+  INSUFFICIENT_PERMISSIONS = {
+    error: 'insufficient_permissions',
+    error_description: 'The access token does not contain the required permissions',
+    message: 'Permission denied'
   }.freeze
 
-  included do
-    # before_action :authenticate_request!
+  def authorize
+    token = token_from_request
+
+    return if performed?
+
+    validation_response = Auth0Client.validate_token(token)
+
+    @decoded_token = validation_response.decoded_token
+
+    return unless (error = validation_response.error)
+
+    render json: { message: error.message }, status: error.status
   end
 
-  def current_user
-    @current_user
+  def validate_permissions(permissions)
+    raise 'validate_permissions needs to be called with a block' unless block_given?
+    return yield if @decoded_token.validate_permissions(permissions)
+
+    render json: INSUFFICIENT_PERMISSIONS, status: :forbidden
   end
 
   private
 
-  def authenticate_request!
-    @auth_payload, @auth_header = auth_token
-    @current_user = User.from_token_payload(@auth_payload)
+  def token_from_request
+    authorization_header_elements = request.headers['Authorization']&.split
 
-    render json: { errors: ['Insufficient scope'] }, status: :forbidden unless scope_included
-  rescue JWT::VerificationError, JWT::DecodeError
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
-  end
+    render json: REQUIRES_AUTHENTICATION, status: :unauthorized and return unless authorization_header_elements
 
-  def http_token
-    request.headers['Authorization'].split.last if request.headers['Authorization'].present?
-  end
-
-  def auth_token
-    JsonWebToken.verify(http_token)
-  end
-
-  def scope_included
-    # The intersection of the scopes included in the given JWT and the ones in the SCOPES hash needed to access
-    # the PATH_INFO, should contain at least one element
-    if SCOPES[request.env['PATH_INFO']].nil?
-      true
-    else
-      (String(@auth_payload['scope']).split & (SCOPES[request.env['PATH_INFO']])).any?
+    unless authorization_header_elements.length == 2
+      render json: MALFORMED_AUTHORIZATION_HEADER,
+             status: :unauthorized and return
     end
+
+    scheme, token = authorization_header_elements
+
+    render json: BAD_CREDENTIALS, status: :unauthorized and return unless scheme.downcase == 'bearer'
+
+    token
   end
 end

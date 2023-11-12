@@ -1,8 +1,8 @@
 import { handleAuth, handleLogin, handleLogout } from '@auth0/nextjs-auth0'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-const AUTO0_DOMAIN = process.env.NEXT_PUBLIC_AUTO0_DOMAIN || ''
-const AUTO0_CLIENT_ID = process.env.NEXT_PUBLIC_AUTO0_CLIENT_ID || ''
+const AUTO0_DOMAIN = process.env.AUTH0_ISSUER_BASE_URL || ''
+const AUTO0_CLIENT_ID = process.env.AUTH0_CLIENT_ID || ''
 
 export const GET = handleAuth({
   login(req: NextApiRequest, res: NextApiResponse) {

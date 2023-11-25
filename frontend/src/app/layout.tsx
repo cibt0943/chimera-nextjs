@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import AuthProvider from '@/components/auth-provider'
 import ThemeProvider from '@/components/theme-provider'
@@ -7,9 +6,12 @@ import './globals.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'kobushi',
-  description: "Let's go home early",
+export const metadata = {
+  title: {
+    default: 'Kobushi',
+    template: `%s | Kobushi`,
+  },
+  description: 'five functions',
 }
 
 export default function RootLayout({

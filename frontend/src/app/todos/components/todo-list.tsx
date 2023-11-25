@@ -1,11 +1,9 @@
-import { Tasks } from '@/types/tasks'
+import { getAllTasks } from '../../api/tasks/route'
 import Todo from './todo'
 
-interface TodoListProps {
-  tasks: Tasks
-}
+export default async function TodoList() {
+  const tasks = await getAllTasks()
 
-export default function TodoList({ tasks }: TodoListProps) {
   return (
     <div>
       {tasks.map((task) => (

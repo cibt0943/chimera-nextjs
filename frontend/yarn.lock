@@ -563,6 +563,18 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tanstack/react-table@^8.10.7":
+  version "8.10.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.10.7.tgz#733f4bee8cf5aa19582f944dd0fd3224b21e8c94"
+  integrity sha512-bXhjA7xsTcsW8JPTTYlUg/FuBpn8MNjiEPhkNhIGCUR6iRQM2+WEco4OBpvDeVcR9SE+bmWLzdfiY7bCbCSVuA==
+  dependencies:
+    "@tanstack/table-core" "8.10.7"
+
+"@tanstack/table-core@8.10.7":
+  version "8.10.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.10.7.tgz#577e8a635048875de4c9d6d6a3c21d26ff9f9d08"
+  integrity sha512-KQk5OMg5OH6rmbHZxuNROvdI+hKDIUxANaHlV+dPlNN7ED3qYQ/WkpY2qlXww1SIdeMlkIhpN/2L00rof0fXFw==
+
 "@types/json-schema@^7.0.12":
   version "7.0.15"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
@@ -1052,7 +1064,7 @@ class-variance-authority@^0.7.0:
   dependencies:
     clsx "2.0.0"
 
-client-only@0.0.1:
+client-only@0.0.1, client-only@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
@@ -2301,6 +2313,11 @@ known-css-properties@^0.29.0:
   resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.29.0.tgz#e8ba024fb03886f23cb882e806929f32d814158f"
   integrity sha512-Ne7wqW7/9Cz54PDt4I3tcV+hAyat8ypyOGzYRJQfdxnnjeWsTxt1cy8pjvvKeI5kfXuyvULyeeAvwvvtAX3ayQ==
 
+ky@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-1.1.3.tgz#0d75906dfae00af0b4ea1a6fe29e505c4a0ee234"
+  integrity sha512-t7q8sJfazzHbfYxiCtuLIH4P+pWoCgunDll17O/GBZBqMt2vHjGSx5HzSxhOc2BDEg3YN/EmeA7VKrHnwuWDag==
+
 language-subtag-registry@^0.3.20:
   version "0.3.22"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.22.tgz#2e1500861b2e457eba7e7ae86877cbd08fa1fd1d"
@@ -3385,6 +3402,14 @@ svg-tags@^1.0.0:
   resolved "https://registry.yarnpkg.com/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
   integrity sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==
 
+swr@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-2.2.4.tgz#03ec4c56019902fbdc904d78544bd7a9a6fa3f07"
+  integrity sha512-njiZ/4RiIhoOlAaLYDqwz5qH/KZXVilRLvomrx83HjzCWTfa+InyfAjv05PSFxnmLzZkNO9ZfvgoqzAaEI4sGQ==
+  dependencies:
+    client-only "^0.0.1"
+    use-sync-external-store "^1.2.0"
+
 table@^6.8.1:
   version "6.8.1"
   resolved "https://registry.yarnpkg.com/table/-/table-6.8.1.tgz#ea2b71359fe03b017a5fbc296204471158080bdf"
@@ -3607,6 +3632,11 @@ use-sidecar@^1.1.2:
   dependencies:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
+
+use-sync-external-store@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 util-deprecate@^1.0.2:
   version "1.0.2"

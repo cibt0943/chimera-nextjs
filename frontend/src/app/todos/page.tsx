@@ -1,9 +1,17 @@
+import { Suspense } from 'react'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 // import styles from './page.module.scss'
-import { getAllTasks } from '../api/task'
+import Spinner from '@/components/spinner'
 import TodoList from './components/todo-list'
 
+export const metadata = {
+  title: 'Todos',
+}
+
 export default withPageAuthRequired(async function Todo() {
-  const tasks = await getAllTasks()
-  return <TodoList tasks={tasks} />
+  return (
+    <Suspense fallback={<Spinner />}>
+      <TodoList />
+    </Suspense>
+  )
 })

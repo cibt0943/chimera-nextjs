@@ -90,7 +90,7 @@ group :development do
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
 
-  gem "ruby-lsp", require: false
+  gem "ruby-lsp"
 
   # ER図の生成
   gem "rails-erd", require: false

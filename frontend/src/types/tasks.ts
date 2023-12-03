@@ -7,6 +7,14 @@ export const TaskStatus = {
 } as const
 export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus]
 
+export const TaskStatusList = [
+  { value: TaskStatus.NEW, label: 'new' },
+  { value: TaskStatus.DONE, label: 'done' },
+  { value: TaskStatus.DOING, label: 'doing' },
+  { value: TaskStatus.CANCELED, label: 'canceled' },
+  { value: TaskStatus.PENDING, label: 'pending' },
+]
+
 export type TaskStatuses = TaskStatus[]
 
 export type Task = {

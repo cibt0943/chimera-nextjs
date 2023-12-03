@@ -18,6 +18,12 @@ module Secured
     message: 'Permission denied'
   }.freeze
 
+  def current_user
+    return @user if @user
+    @auth_payload, @auth_header = @decoded_token.token
+    @user = User.from_token_payload(@auth_payload)
+  end
+
   def authorize
     token = token_from_request
 
@@ -26,7 +32,6 @@ module Secured
     validation_response = Auth0Client.validate_token(token)
 
     @decoded_token = validation_response.decoded_token
-
     return unless (error = validation_response.error)
 
     render json: { message: error.message }, status: error.status

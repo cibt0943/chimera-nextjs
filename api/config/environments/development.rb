@@ -66,10 +66,6 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # assetの配信元
-  port = ENV['ASSET_PORT'] ? ":#{ENV['ASSET_PORT']}" : ''
-  config.asset_host = "//#{ENV['ASSET_HOST']}#{port}"
-
   # 標準出力とログファイルの両方に出力
   std_logger = ActiveSupport::Logger.new(STDOUT)
   logger = ActiveSupport::Logger.new("log/#{Rails.env}.log")

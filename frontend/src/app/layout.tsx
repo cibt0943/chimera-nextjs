@@ -11,7 +11,7 @@ export const metadata = {
     default: 'Kobushi',
     template: `%s | Kobushi`,
   },
-  description: 'five functions',
+  description: 'Service with 5 functions',
 }
 
 export default function RootLayout({
@@ -25,10 +25,10 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider>
             <div className="flex">
-              <aside className="w-48 min-h-screen">
+              <aside className="w-48 fixed">
                 <Sidebar />
               </aside>
-              <main>{children}</main>
+              <main className="ml-48 mt-6">{children}</main>
             </div>
           </ThemeProvider>
         </AuthProvider>

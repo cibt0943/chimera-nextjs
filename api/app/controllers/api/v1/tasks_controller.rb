@@ -6,7 +6,7 @@ module Api
         # p @auth_payload
         # tasks = Task.where(user_id: current_user, status: params[:statuses]).order(:position)
         # tasks = Task.where(user_id: current_user, status: params[:statuses])
-        tasks = Task.where(user_id: nil)
+        tasks = Task.where(user_id: current_user.id)
         render json: tasks, status: :ok, each_serializer: TaskSerializer
       end
 
@@ -57,7 +57,7 @@ module Api
       end
 
       def find_task(id)
-        Task.find_by(id: id, user_id: current_user)
+        Task.find_by(id: id, user_id: current_user.id)
       end
     end
   end

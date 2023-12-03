@@ -1,9 +1,18 @@
 import { NextResponse } from 'next/server'
+// import { Session, getSession } from '@auth0/nextjs-auth0'
 import { apiClient } from '@/lib/api-client'
 import { Tasks } from '@/types/tasks'
 
 export async function getAllTasks(): Promise<Tasks> {
-  const res = await apiClient.get(`tasks`)
+  // const { user } = (await getSession()) as Session
+
+  // const res = await apiClient.get('tasks', {
+  //   searchParams: {
+  //     user_id: user.sub,
+  //   },
+  // })
+
+  const res = await apiClient.get('tasks')
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')

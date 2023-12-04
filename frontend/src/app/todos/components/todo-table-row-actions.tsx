@@ -21,7 +21,6 @@ export function TodoTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const task = row.original
-  console.log(task)
 
   return (
     <DropdownMenu>

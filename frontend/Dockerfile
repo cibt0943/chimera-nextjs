@@ -2,8 +2,8 @@ FROM node:20
 
 ENV APP_ROOT /app/frontend
 
-# RUN apt -y update && \
-#     apt -y upgrade
+RUN apt -y update && \
+    apt -y upgrade
 
 # 言語設定
 RUN apt -y install locales && \

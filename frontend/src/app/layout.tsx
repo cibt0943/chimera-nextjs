@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
-import AuthProvider from '@/components/auth-provider'
-import ThemeProvider from '@/components/theme-provider'
-import Sidebar from '@/components/sidebar'
+import { AuthProvider } from '@/components/auth-provider'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Sidebar } from '@/components/sidebar'
 import './globals.scss'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,10 +25,12 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider>
             <div className="flex">
-              <aside className="w-48 fixed">
-                <Sidebar />
+              <aside className="flex-none w-48">
+                <div className="sticky top-0">
+                  <Sidebar />
+                </div>
               </aside>
-              <main className="ml-48 mt-6">{children}</main>
+              <main className="grow pt-4">{children}</main>
             </div>
           </ThemeProvider>
         </AuthProvider>

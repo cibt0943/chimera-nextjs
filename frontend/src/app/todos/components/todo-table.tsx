@@ -26,16 +26,17 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
+import { TodoTableToolbar } from './todo-table-toolbar'
 
-interface DataTableProps<TData, TValue> {
+interface TodoTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export default function TodoTable<TData, TValue>({
-  data,
+export function TodoTable<TData, TValue>({
   columns,
-}: DataTableProps<TData, TValue>) {
+  data,
+}: TodoTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -72,7 +73,8 @@ export default function TodoTable<TData, TValue>({
   })
 
   return (
-    <div>
+    <div className="space-y-4">
+      <TodoTableToolbar table={table} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -80,7 +82,15 @@ export default function TodoTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      style={{
+                        width:
+                          header.getSize() !== 150
+                            ? header.getSize()
+                            : undefined,
+                      }}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

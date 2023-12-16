@@ -26,4 +26,10 @@ class TaskSerializer < ActiveModel::Serializer
   def status
     Task.statuses[object.status]
   end
+
+  # def due_date
+  #   object.due_date&.strftime("%F")
+  #   # object.due_date ? I18n.l(object.due_date) : ""
+  # end
+
 end

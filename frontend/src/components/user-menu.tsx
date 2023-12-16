@@ -26,7 +26,7 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-export default function UserMenu() {
+export function UserMenu() {
   const router = useRouter()
   const { user, isLoading } = useUser()
   const { theme, setTheme } = useTheme()

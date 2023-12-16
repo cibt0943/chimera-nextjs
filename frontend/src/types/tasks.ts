@@ -27,17 +27,9 @@ export type Task = {
 
 export type Tasks = Task[]
 
-export type TaskEdit = {
-  id: number
+export type TaskFormData = {
   status?: TaskStatus
   title?: string
   memo?: string
-  dueDate?: Date | null
-}
-
-export type TaskFormErrorMessages = {
-  status?: string
-  title?: string
-  memo?: string
-  dueDate?: string
+  dueDate?: Date
 }

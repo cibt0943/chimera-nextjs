@@ -40,5 +40,8 @@ module Api
     config.i18n.default_locale = :ja
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
+
+    # csrf無効化
+    config.action_controller.default_protect_from_forgery = false
   end
 end

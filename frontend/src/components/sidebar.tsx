@@ -7,14 +7,14 @@ import {
   RxPencil2,
 } from 'react-icons/rx'
 import { Button } from '@/components/ui/button'
-import UserMenu from '@/components/user-menu'
+import { UserMenu } from '@/components/user-menu'
 
-export default function Sidebar() {
+export function Sidebar() {
   return (
     <div className="px-2 py-4">
-      <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+      <h1 className="mb-2 px-4 text-2xl font-bold tracking-tight">
         <Link href="/">kobushi</Link>
-      </h2>
+      </h1>
       <div className="">
         <Button variant="ghost" className="w-full justify-start" asChild>
           <Link href="/todos">

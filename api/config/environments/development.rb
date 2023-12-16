@@ -77,4 +77,7 @@ Rails.application.configure do
 
   # アクセス可能なホストの指定
   config.hosts.clear
+
+  # docker環境にて'Cannot render console from 〜'ってエラーの対応
+  config.web_console.allowed_ips = '0.0.0.0/0'
 end

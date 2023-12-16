@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 // import styles from './page.module.scss'
-import Spinner from '@/components/spinner'
-import TodoContainer from './components/todo-container'
+import { TodoListSkeleton } from './components/todo-list-skeleton'
+import { TodoContainer } from './components/todo-container'
 
 export const metadata = {
   title: 'Todos',
@@ -10,8 +10,10 @@ export const metadata = {
 
 export default withPageAuthRequired(async function Page() {
   return (
-    <Suspense fallback={<Spinner />}>
-      <TodoContainer />
-    </Suspense>
+    <div className="container px-4">
+      <Suspense fallback={<TodoListSkeleton />}>
+        <TodoContainer />
+      </Suspense>
+    </div>
   )
 })

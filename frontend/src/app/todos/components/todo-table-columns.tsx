@@ -10,6 +10,7 @@ import { Task, TaskStatusList } from '@/types/tasks'
 export const columns: ColumnDef<Task>[] = [
   {
     id: 'select',
+    size: 50,
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -34,10 +35,12 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: 'id',
+    size: 80,
     header: ({ column }) => (
       <TodoTableColumnHeader column={column} title="ID" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
+    // cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('id')}</div>,
   },
   {
     accessorKey: 'title',
@@ -50,15 +53,15 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div className="flex space-x-2">
           {/* {label && <Badge variant="outline">{label.label}</Badge>} */}
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue('title')}
-          </span>
+          {/* <span className="max-w-[500px] truncate font-medium"> */}
+          <span className="truncate font-medium">{row.getValue('title')}</span>
         </div>
       )
     },
   },
   {
     accessorKey: 'status',
+    size: 100,
     header: ({ column }) => (
       <TodoTableColumnHeader column={column} title="状態" />
     ),
@@ -70,7 +73,8 @@ export const columns: ColumnDef<Task>[] = [
       if (!status) return null
 
       return (
-        <div className="flex w-[100px] items-center">
+        // <div className="flex w-[100px] items-center">
+        <div className="flex items-center">
           <span>{status.label}</span>
         </div>
       )
@@ -81,14 +85,14 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: 'dueDate',
+    size: 220,
     header: ({ column }) => (
       <TodoTableColumnHeader column={column} title="期限" />
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex w-[190px] items-center">
-          {row.getValue('dueDate')}
-        </div>
+        // <div className="flex w-[190px] items-center">
+        <div className="flex items-center">{row.getValue('dueDate')}</div>
       )
     },
     filterFn: (row, id, value) => {
@@ -97,6 +101,7 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     id: 'actions',
+    size: 50,
     cell: ({ row }) => <TodoTableRowActions row={row} />,
   },
 ]

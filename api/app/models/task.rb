@@ -26,6 +26,6 @@ class Task < ApplicationRecord
 
   validates :status, inclusion: { in: %w[new done doing canceled pending], message: I18n.t('errors.messages.invalid') }
   validates :title, presence: true, length: { maximum: 255 }
-  # validates :memo
+  validates :memo, length: { maximum: 65535 }
   validates :due_date, date: true
 end

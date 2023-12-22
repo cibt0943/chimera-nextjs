@@ -30,7 +30,7 @@ export default function RootLayout({
                   <Sidebar />
                 </div>
               </aside>
-              <main className="grow pt-4">{children}</main>
+              <main className="grow py-4">{children}</main>
             </div>
           </ThemeProvider>
         </AuthProvider>

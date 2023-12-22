@@ -5,5 +5,5 @@ import { getAllTasks } from '../../api/tasks/route'
 export async function TodoContainer() {
   const tasks = await getAllTasks()
 
-  return <TodoTable data={tasks} columns={columns} />
+  return <TodoTable columns={columns} data={tasks} />
 }

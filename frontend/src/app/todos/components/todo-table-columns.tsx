@@ -1,11 +1,13 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-// import { Badge } from '@/components/ui/badge'
+
+import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
+
+import { Task, TaskStatusList } from '@/types/tasks'
 import { TodoTableColumnHeader } from './todo-table-column-header'
 import { TodoTableRowActions } from './todo-table-row-actions'
-import { Task, TaskStatusList } from '@/types/tasks'
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -48,12 +50,8 @@ export const columns: ColumnDef<Task>[] = [
       <TodoTableColumnHeader column={column} title="タイトル" />
     ),
     cell: ({ row }) => {
-      // const label = labels.find((label) => label.value === row.original.label)
-
       return (
-        <div className="flex space-x-2">
-          {/* {label && <Badge variant="outline">{label.label}</Badge>} */}
-          {/* <span className="max-w-[500px] truncate font-medium"> */}
+        <div className="">
           <span className="truncate font-medium">{row.getValue('title')}</span>
         </div>
       )
@@ -73,9 +71,8 @@ export const columns: ColumnDef<Task>[] = [
       if (!status) return null
 
       return (
-        // <div className="flex w-[100px] items-center">
-        <div className="flex items-center">
-          <span>{status.label}</span>
+        <div className="items-center">
+          <Badge>{status.label}</Badge>
         </div>
       )
     },
@@ -90,10 +87,7 @@ export const columns: ColumnDef<Task>[] = [
       <TodoTableColumnHeader column={column} title="期限" />
     ),
     cell: ({ row }) => {
-      return (
-        // <div className="flex w-[190px] items-center">
-        <div className="flex items-center">{row.getValue('dueDate')}</div>
-      )
+      return <div className="items-center">{row.getValue('dueDate')}</div>
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
@@ -102,6 +96,6 @@ export const columns: ColumnDef<Task>[] = [
   {
     id: 'actions',
     size: 50,
-    cell: ({ row }) => <TodoTableRowActions row={row} />,
+    cell: ({ row, table }) => <TodoTableRowActions row={row} table={table} />,
   },
 ]

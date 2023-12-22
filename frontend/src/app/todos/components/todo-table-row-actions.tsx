@@ -1,7 +1,7 @@
 'use client'
 
-import { Row } from '@tanstack/react-table'
-import { RxDotsHorizontal } from 'react-icons/rx'
+import { Row, Table } from '@tanstack/react-table'
+import { RxDotsHorizontal, RxPencil1, RxTrash } from 'react-icons/rx'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -9,16 +9,17 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
+  table: Table<TData>
 }
 
 export function TodoTableRowActions<TData>({
   row,
+  table,
 }: DataTableRowActionsProps<TData>) {
   const task = row.original
 
@@ -34,13 +35,18 @@ export function TodoTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            table.options.meta?.openEditDialog(task)
+          }}
+        >
+          <RxPencil1 className="mr-2 h-4 w-4" />
+          編集
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <RxTrash className="mr-2 h-4 w-4" />
+          削除
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

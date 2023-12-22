@@ -1,9 +1,11 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
+import * as React from 'react'
+import { UseFormReturn } from 'react-hook-form'
+import { RxCalendar } from 'react-icons/rx'
+import { format } from 'date-fns'
 
+import { cn } from '@/lib/utils'
 import {
   Form,
   FormControl,
@@ -13,39 +15,32 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Calendar } from '@/components/ui/calendar'
+import { ja } from 'date-fns/locale'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
-import { TaskFormData } from '@/types/tasks'
 import { addTask } from '@/lib/actions/task'
-
-const zodString = z.string({ required_error: '必須項目です' })
-const taskFormSchema = z.object({
-  title: zodString.max(255, {
-    message: '255文字以内で入力してください',
-  }),
-  memo: zodString
-    .max(10000, {
-      message: '10000文字以内で入力してください',
-    })
-    .optional(),
-})
+import { TaskSchemaType } from '@/types/tasks'
 
 export function TaskForm({
   children,
-  task,
+  form,
 }: {
   children: React.ReactNode
-  task: TaskFormData
+  form: UseFormReturn<TaskSchemaType>
 }) {
-  const form = useForm<z.infer<typeof taskFormSchema>>({
-    resolver: zodResolver(taskFormSchema),
-    defaultValues: task,
-  })
-
-  async function onSubmit(values: z.infer<typeof taskFormSchema>) {
+  async function onSubmit(values: TaskSchemaType) {
     await addTask(values)
   }
+
+  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false)
 
   return (
     <Form {...form}>
@@ -74,7 +69,48 @@ export function TaskForm({
               <FormControl>
                 <Textarea placeholder="" className="resize-none" {...field} />
               </FormControl>
-              <FormDescription>説明をここに書く</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="dueDate"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>期限</FormLabel>
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={'outline'}
+                      className={cn(
+                        'pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground',
+                      )}
+                    >
+                      {field.value ? format(field.value, 'PPP') : <span></span>}
+                      <RxCalendar className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={(e) => {
+                      field.onChange(e)
+                      setIsCalendarOpen(false)
+                    }}
+                    defaultMonth={field.value}
+                    // initialFocus
+                    locale={ja} // ここでlocaleを渡す
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormDescription>
+                クリアする際は設定している日付を再度クリックします
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

@@ -9,7 +9,6 @@ import { Input } from '@/components/ui/input'
 import { TaskStatusList } from '@/types/tasks'
 import { TodoTableViewOptions } from './todo-table-view-options'
 import { TodoTableFacetedFilter } from './todo-table-faceted-filter'
-import { AddTask } from './add-task'
 
 interface TodoTableToolbarProps<TData> {
   table: Table<TData>
@@ -21,9 +20,8 @@ export function TodoTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-1 items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
-        <AddTask />
         <Input
           placeholder="Filter tasks..."
           value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}

@@ -24,7 +24,7 @@ export type Task = {
   status: TaskStatus
   title: string
   memo: string
-  dueDate: Date | undefined
+  dueDate: Date | null
 }
 
 export type Tasks = Task[]
@@ -34,28 +34,25 @@ export type TaskFormData = {
   status?: TaskStatus
   title?: string
   memo?: string
-  dueDate?: Date | undefined
+  dueDate?: Date | null
 }
 
-export const NewTask: Task = {
-  id: -1,
-  title: '',
-  memo: '',
-  dueDate: undefined,
-  status: TaskStatus.NEW,
-}
+export const createTask = (task?: Task): Task => ({
+  id: task?.id || -1,
+  title: task?.title || '',
+  memo: task?.memo || '',
+  dueDate: task?.dueDate || null,
+  status: task?.status || TaskStatus.NEW,
+})
 
 export const TaskSchema = z.object({
   title: z.string().min(1, { message: '必須項目です' }).max(255, {
     message: '255文字以内で入力してください',
   }),
-  memo: z
-    .string()
-    .max(10000, {
-      message: '10000文字以内で入力してください',
-    })
-    .optional(),
-  dueDate: z.date().optional(),
+  memo: z.string().max(10000, {
+    message: '10000文字以内で入力してください',
+  }),
+  dueDate: z.date().nullable(),
 })
 
 export type TaskSchemaType = z.infer<typeof TaskSchema>

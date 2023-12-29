@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { RxPlus } from 'react-icons/rx'
+import { parseISO } from 'date-fns'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -29,7 +30,7 @@ import {
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 
-import { Task, Tasks, NewTask } from '@/types/tasks'
+import { Task, Tasks, createTask } from '@/types/tasks'
 import { TodoTableToolbar } from './todo-table-toolbar'
 import { TaskDialog } from './task-dialog'
 
@@ -55,15 +56,21 @@ export function TodoTable({ columns, data }: TodoTableProps) {
 
   //taskDialog関連
   const [openDialog, setOpenDialog] = React.useState(false)
-  const [formTask, setFormTask] = React.useState<Task>(NewTask)
+  const [formTask, setFormTask] = React.useState<Task>(createTask())
 
   function openTaskDialog(task: Task) {
-    setFormTask(task)
+    setFormTask(() => ({
+      ...task,
+      dueDate:
+        task.dueDate && typeof task.dueDate === 'string'
+          ? parseISO(task.dueDate)
+          : task.dueDate,
+    }))
     setOpenDialog(true)
   }
 
   function openAddTaskDialog() {
-    openTaskDialog(NewTask)
+    openTaskDialog(createTask())
   }
 
   const table = useReactTable({

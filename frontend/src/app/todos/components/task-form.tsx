@@ -89,7 +89,11 @@ export function TaskForm({
                         !field.value && 'text-muted-foreground',
                       )}
                     >
-                      {field.value ? format(field.value, 'PPP') : <span></span>}
+                      {field.value ? (
+                        format(field.value, 'yyyy/MM/dd HH:mm')
+                      ) : (
+                        <span></span>
+                      )}
                       <RxCalendar className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
@@ -97,19 +101,21 @@ export function TaskForm({
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
-                    selected={field.value}
+                    selected={field.value ? field.value : undefined}
                     onSelect={(e) => {
                       field.onChange(e)
                       setIsCalendarOpen(false)
                     }}
-                    defaultMonth={field.value}
+                    defaultMonth={field.value ? field.value : undefined}
                     // initialFocus
                     locale={ja} // ここでlocaleを渡す
                   />
                 </PopoverContent>
               </Popover>
               <FormDescription>
-                クリアする際は設定している日付を再度クリックします
+                {field.value
+                  ? 'クリアする際は設定している日付を再度クリックします'
+                  : ''}
               </FormDescription>
               <FormMessage />
             </FormItem>

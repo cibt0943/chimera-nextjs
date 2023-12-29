@@ -11,7 +11,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from '@/components/ui/dialog'
 
 import { Task, TaskSchema, TaskSchemaType } from '@/types/tasks'

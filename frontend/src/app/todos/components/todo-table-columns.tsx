@@ -1,5 +1,6 @@
 'use client'
 
+import { format } from 'date-fns'
 import { ColumnDef } from '@tanstack/react-table'
 
 import { Badge } from '@/components/ui/badge'
@@ -87,7 +88,14 @@ export const columns: ColumnDef<Task>[] = [
       <TodoTableColumnHeader column={column} title="期限" />
     ),
     cell: ({ row }) => {
-      return <div className="items-center">{row.getValue('dueDate')}</div>
+      const dateStr: string = row.getValue('dueDate')
+      if (!dateStr) return ''
+
+      return (
+        <div className="items-center">
+          {format(dateStr, 'yyyy/MM/dd HH:mm')}
+        </div>
+      )
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))

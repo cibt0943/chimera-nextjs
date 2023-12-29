@@ -20,6 +20,7 @@ module Secured
 
   def current_user
     return @user if @user
+    return nil if !@decoded_token
     @auth_payload, @auth_header = @decoded_token.token
     @user = User.from_token_payload(@auth_payload)
   end
